@@ -1,4 +1,3 @@
-#Importando as nossas bibliotecas
 import streamlit as st
 import pandas as pd
 from pandas import factorize
