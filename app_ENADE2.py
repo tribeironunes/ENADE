@@ -31,12 +31,10 @@ with dataset:
     ENADE['taxa_participacao'] = ENADE['presentes'] / ENADE['populacao']
 
 with features:
-    st.sidebar.image('PROGRAD_UFCAT.png', width=290)
-    st.sidebar.write('Diretoria de Currículo, Avaliação e Diploma')
-    st.sidebar.caption('Esta aplicação permite explorar os dados do ENADE e '
+    st.sidebar.write('**PROGRAD/UFCAT**')
+    st.sidebar.caption('**Esta aplicação permite explorar os dados do ENADE e '
              'visualizar gráficos sobre a performance dos cursos da nossa instituição. '
-             'Selecione uma das opções no menu lateral para começar a explorar os dados.')
-    st.sidebar.header('Explorando os dados do ENADE - UFCAT')
+             'Selecione uma das opções no menu lateral para começar a explorar os dados.**')
 
     st.sidebar.write("**Exibir o conjunto de dados ou a estatística descritiva do conjunto de dados:**")
     # exibe o dataset
