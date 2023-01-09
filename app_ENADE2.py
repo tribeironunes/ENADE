@@ -8,10 +8,6 @@ from scipy.stats import pearsonr, spearmanr
 from math import sqrt
 import plotly.graph_objects as go
 import plotly.express as px
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import r2_score
 
 
 def get_data(filename):
@@ -220,56 +216,9 @@ with features:
     st.write('Taxa de participação:')
     st.line_chart(comparecimento_prova)
 
-with predictions:
-    # Carrega os dados do arquivo CSV
-    enade_df = pd.read_csv('ENADE.csv')
-    # Seleciona as colunas desejadas
-    enade_df = enade_df[['populacao', 'presentes']]
-    # Preenche os valores faltantes com a média das colunas
-    enade_df = enade_df.fillna(enade_df.mean())
-
-    # Cria um objeto do tipo LinearRegression
-    regressor = LinearRegression()
-    # Separa os dados de "população" e "presentes" em duas variáveis X e y
-    X = enade_df[['populacao']]
-    y = enade_df[['presentes']]
-    # Treina o modelo de regressão com os dados de "população" e "presentes"
-    regressor.fit(X, y)
-
-    st.sidebar.write("**Estimativa de comparecimento à prova para os cursos da UFCAT:**")
-
-    # Cria um slider para selecionar a população prevista
-    populacao_prevista = st.sidebar.slider('Número de alunos selecionados para o ENADE', 0,
-                                        70, 5, step=5)
-    # Faz a previsão do valor de "presentes" para o valor de "população" selecionado pelo usuário
-    presentes_previstos = regressor.predict([[populacao_prevista]])[0][0]
-    st.sidebar.write(
-        f'Dos {populacao_prevista} alunos selecionados, estima-se que {presentes_previstos:.2f} alunos compareçam à prova.')
-
-    # Faz previsões com o modelo treinado
-    y_pred = regressor.predict(X)
-    # Calcula o MAE entre os valores reais e os valores previstos pelo modelo
-    mae = mean_absolute_error(y, y_pred)
-    # Calcula o MSE
-    mse = mean_squared_error(y, y_pred)
-    # Calcula o R²
-    r2 = r2_score(y, y_pred)
-
     st.caption("Diretoria de Currículo, Avaliação e Diploma (PROGRAD/UFCAT)")
 
     # Adiciona uma mensagem de aviso na página inicial
     st.warning('Esta é uma versão Beta da aplicação e pode apresentar erros ou inconsistências')
-
-with st.sidebar:
-  # Adiciona um checkbox para exibir todas as métricas
-  exibir_todas_metricas = st.sidebar.checkbox("Exibir as métricas de avaliação do modelo")
-
-  # Se o checkbox para exibir todas as métricas for marcado, exibe todas as métricas
-  if exibir_todas_metricas:
-    st.sidebar.caption("**Modelo: Regressão Linear**")
-    st.sidebar.caption(f'* Média do valor absoluto dos erros (MAE): {mae:.2f}')
-    st.sidebar.caption(f'* Média dos quadrados dos erros (MSE): {mse:.2f}')
-    st.sidebar.caption(f'* R² (varia entre 0 e 1): {r2:.2f}')
-
- # Adiciona a badge "Beta" na barra lateral
+    # Adiciona a badge "Beta" na barra lateral
     st.sidebar.warning('Esta é uma versão Beta da aplicação')
