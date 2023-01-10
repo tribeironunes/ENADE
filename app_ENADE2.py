@@ -42,7 +42,7 @@ with features:
         # exibe os dados gerais
         st.subheader('Visão geral dos dados:')
         st.dataframe(ENADE, width=1000)
-        st.caption('Fonte: https://enade.inep.gov.br/enade/#!/relatorioCursos')
+        st.caption('Fonte: https://enade.inep.gov.br/enade/#!/relatorioIES')
         st.caption('*Até 2014 os relatórios do ENADE não discriminam os dados por cidade.')
         st.caption('**Os dados de 2015 estão indiponíveis para a cidade de Catalão.')
 
@@ -51,6 +51,9 @@ with features:
         # descreve os dados
         st.subheader("Estatística descritiva do conjunto de dados do ENADE - UFCAT:")
         st.table(ENADE.describe())
+        st.caption('Fonte: https://enade.inep.gov.br/enade/#!/relatorioIES')
+        st.caption('*Até 2014 os relatórios do ENADE não discriminam os dados por cidade.')
+        st.caption('**Os dados de 2015 estão indiponíveis para a cidade de Catalão.')
 
     # seleciona uma das colunas do dataset para gerar o histograma
     st.sidebar.write("**Gerar Histograma e Box Plot da variável selecionada:**")
